@@ -29,9 +29,26 @@ const register = async (req, res) => {
     avatarUrl,
   });
 
+  let token = "";
+
+  const thisUser = await User.findOne({ email });
+  if (thisUser) {
+    const payload = {
+      id: thisUser._id,
+    };
+
+    token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+
+    await User.findByIdAndUpdate(thisUser._id, { token });
+  }
+
   res.status(201).json({
-    email: newUser.email,
-    name: newUser.name,
+    token,
+    user: {
+      email: newUser.email,
+      name: newUser.name,
+      avatar: newUser.avatarUrl,
+    },
   });
 };
 
@@ -57,16 +74,18 @@ const login = async (req, res) => {
 
   res.status(200).json({
     token,
-    user: {name: user.name, phone: user.phone},
+    user: { name: user.name, phone: user.phone, avatar: user.avatarUrl },
   });
 };
 
 const getCurrent = async (req, res) => {
-  const { email, name } = req.user;
+  const { email, name, phone, avatarUrl } = req.user;
 
   res.json({
     email,
     name,
+    phone,
+    avatar: avatarUrl,
   });
 };
 

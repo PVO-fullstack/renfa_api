@@ -80,5 +80,5 @@ const Part = model("part", partSchema);
 
 module.exports = {
   Part,
-  // schemas,
+  schemas,
 };

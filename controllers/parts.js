@@ -16,14 +16,14 @@ const getAllParts = async (req, res) => {
 };
 
 const getModelBrand = async (req, res) => {
-  const { Brand } = req.body;
-  const result = await Part.find({ Brand }, { Model: 1 });
+  const { brand } = req.params;
+  const result = await Part.find({ Brand: brand }, { Model: 1 });
   res.status(200).json(result);
 };
 
 const getModel = async (req, res) => {
-  const { Model } = req.body;
-  const result = await Part.find({ Model });
+  const { model } = req.params;
+  const result = await Part.find({ Model: model });
   res.status(200).json(result);
 };
 

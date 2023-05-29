@@ -8,9 +8,9 @@ const { schemas } = require("../../models/part");
 
 router.get("/", ctrl.getAllParts);
 
-router.get("/brand", ctrl.getModelBrand);
+router.get("/model:brand", ctrl.getModelBrand);
 
-router.get("/model", ctrl.getModel);
+router.get("/brand:model", ctrl.getModel);
 
 router.get("/:partId", authenticate, isValidId, ctrl.getPartById);
 

@@ -6,7 +6,11 @@ const { validateBody, isValidId, authenticate } = require("../../middlewares");
 
 const { schemas } = require("../../models/part");
 
-router.get("/", authenticate, ctrl.getAllParts);
+router.get("/", ctrl.getAllParts);
+
+router.get("/brand", ctrl.getModelBrand);
+
+router.get("/model", ctrl.getModel);
 
 router.get("/:partId", authenticate, isValidId, ctrl.getPartById);
 

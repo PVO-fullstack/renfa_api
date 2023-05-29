@@ -1,5 +1,6 @@
 const { Part } = require("../models/part");
 const { HttpError, ctrlWrapper } = require("../helpers");
+const { Model } = require("mongoose");
 
 const getAllParts = async (req, res) => {
   const { _id: owner } = req.user;
@@ -11,6 +12,18 @@ const getAllParts = async (req, res) => {
     skip,
     limit,
   });
+  res.status(200).json(result);
+};
+
+const getModelBrand = async (req, res) => {
+  const { Brand } = req.body;
+  const result = await Part.find({ Brand }, { Model: 1 });
+  res.status(200).json(result);
+};
+
+const getModel = async (req, res) => {
+  const { Model } = req.body;
+  const result = await Part.find({ Model });
   res.status(200).json(result);
 };
 
@@ -65,6 +78,8 @@ const updatePartById = async (req, res) => {
 
 module.exports = {
   getAllParts: ctrlWrapper(getAllParts),
+  getModelBrand: ctrlWrapper(getModelBrand),
+  getModel: ctrlWrapper(getModel),
   getPartById: ctrlWrapper(getPartById),
   postPart: ctrlWrapper(postPart),
   deletePartById: ctrlWrapper(deletePartById),

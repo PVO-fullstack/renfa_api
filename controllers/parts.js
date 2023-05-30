@@ -2,15 +2,27 @@ const { Part } = require("../models/part");
 const { HttpError, ctrlWrapper } = require("../helpers");
 const { Model } = require("mongoose");
 
+// const getAllParts = async (req, res) => {
+//   const { _id: owner } = req.user;
+//   const { page = 1, limit = 10 } = req.query;
+//   console.log("page", page);
+//   console.log("limit", limit);
+//   const skip = (page - 1) * limit;
+//   const result = await Part.find({ owner }, "-createdAt -updatedAt", {
+//     skip,
+//     limit,
+//   });
+//   res.status(200).json(result);
+// };
+
 const getAllParts = async (req, res) => {
-  const { _id: owner } = req.user;
-  const { page = 1, limit = 10 } = req.query;
-  console.log("page", page);
-  console.log("limit", limit);
-  const skip = (page - 1) * limit;
-  const result = await Part.find({ owner }, "-createdAt -updatedAt", {
-    skip,
-    limit,
+  // const { page = 1, limit = 10 } = req.query;
+  // console.log("page", page);
+  // console.log("limit", limit);
+  // const skip = (page - 1) * limit;
+  const result = await Part.find({}, "-createdAt -updatedAt", {
+    // skip,
+    // limit,
   });
   res.status(200).json(result);
 };

@@ -28,13 +28,13 @@ const addSchema = Joi.object({
   partId: Joi.array().items(Joi.string()),
 });
 
-// const updateFavoriteSchema = Joi.object({
-//   favorite: Joi.boolean().required(),
-// });
+const updateCloseSchema = Joi.object({
+  close: Joi.boolean().required(),
+});
 
 const schemas = {
   addSchema,
-  // updateFavoriteSchema,
+  updateCloseSchema,
 };
 
 const Order = model("order", orderSchema);

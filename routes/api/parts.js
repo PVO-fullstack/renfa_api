@@ -12,16 +12,21 @@ router.get("/model:brand", ctrl.getModelBrand);
 
 router.get("/brand:model", ctrl.getModel);
 
-router.get("/:partId", authenticate, isValidId, ctrl.getPartById);
+router.get("/:partId", authenticate, isValidId.isValidPartId, ctrl.getPartById);
 
 router.post("/", authenticate, validateBody(schemas.addSchema), ctrl.postPart);
 
-router.delete("/:partId", authenticate, isValidId, ctrl.deletePartById);
+router.delete(
+  "/:partId",
+  authenticate,
+  isValidId.isValidPartId,
+  ctrl.deletePartById
+);
 
 router.put(
   "/:partId",
   authenticate,
-  isValidId,
+  isValidId.isValidPartId,
   validateBody(schemas.addSchema),
   ctrl.updatePartById
 );

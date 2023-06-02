@@ -98,21 +98,22 @@ const postOrders = async (req, res) => {
 //   res.json(result);
 // };
 
-// const updateFavoriteContactById = async (req, res) => {
-//   const { contactId } = req.params;
-//   const result = await Contact.findByIdAndUpdate(contactId, req.body, {
-//     new: true,
-//   });
-//   if (!result) {
-//     throw HttpError(404, "Not found");
-//   }
-//   res.json(result);
-// };
+const updateOrderById = async (req, res) => {
+  const { orderId } = req.params;
+  const result = await Order.findByIdAndUpdate(orderId, req.body, {
+    close: true,
+  });
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
+  res.json(result);
+};
 
 module.exports = {
   getAllOrders: ctrlWrapper(getAllOrders),
   postOrders: ctrlWrapper(postOrders),
   getUserOrders: ctrlWrapper(getUserOrders),
+  updateOrderById: ctrlWrapper(updateOrderById),
   //   getModelBrand: ctrlWrapper(getModelBrand),
   //   getModel: ctrlWrapper(getModel),
   //   getPartById: ctrlWrapper(getPartById),

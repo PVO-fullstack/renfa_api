@@ -20,10 +20,10 @@ const userSchema = new Schema(
       required: [true, "Email is required"],
       unique: true,
     },
-    subscription: {
+    position: {
       type: String,
-      enum: ["starter", "pro", "business"],
-      default: "starter",
+      enum: ["retail", "wholesale", "admin"],
+      default: "retail",
     },
     token: {
       type: String,

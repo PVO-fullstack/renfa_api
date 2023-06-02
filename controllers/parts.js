@@ -49,9 +49,9 @@ const getPartById = async (req, res) => {
 };
 
 const postPart = async (req, res) => {
-  const { _id: owner } = req.user;
-  console.log(owner);
-  const result = await Part.create({ ...req.body, owner });
+  // const { _id: owner } = req.user;
+  // console.log(owner);
+  const result = await Part.create({ ...req.body });
   res.status(201).json(result);
 };
 

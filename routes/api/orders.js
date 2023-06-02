@@ -38,12 +38,12 @@ router.post(
 //   ctrl.updatePartById
 // );
 
-// router.patch(
-//   "/:contactId/favorite",
-//   authenticate,
-//   isValidId,
-//   validateBody(schemas.updateFavoriteSchema),
-//   ctrl.updateFavoriteContactById
-// );
+router.patch(
+  "/:orderId/close",
+  authenticate,
+  isValidId.isValidOrderId,
+  validateBody(schemas.updateCloseSchema),
+  ctrl.updateOrderById
+);
 
 module.exports = router;

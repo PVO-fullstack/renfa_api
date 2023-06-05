@@ -30,13 +30,15 @@ const { HttpError, ctrlWrapper } = require("../helpers");
 const getAllOrders = async (req, res) => {
   const result = await Order.find({}, "-updatedAt")
     .populate("owner")
-    .populate("partId");
+    .populate("partId.id");
   res.status(200).json(result);
 };
 
 const getUserOrders = async (req, res) => {
   const { _id: owner } = req.user;
-  const result = await Order.find({ owner }, "-updatedAt").populate("partId");
+  const result = await Order.find({ owner }, "-updatedAt").populate(
+    "partId.id"
+  );
   res.status(200).json(result);
 };
 

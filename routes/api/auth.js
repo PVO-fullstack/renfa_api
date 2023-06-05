@@ -27,4 +27,6 @@ router.patch(
   ctrl.updateAvatar
 );
 
+router.patch("/users/data", authenticate, ctrl.updateUser);
+
 module.exports = router;

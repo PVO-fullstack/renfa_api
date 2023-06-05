@@ -77,9 +77,33 @@ const login = async (req, res) => {
     user: {
       name: user.name,
       phone: user.phone,
+      email: user.email,
       avatar: user.avatarUrl,
       position: user.position,
+      city: user.city,
+      numberNewPost: user.numberNewPost,
     },
+  });
+};
+
+const updateUser = async (req, res) => {
+  const { _id } = req.user;
+  const { phone, city, name, numberNewPost } = req.body;
+  // const user = await User.findOne({ email });
+  console.log("user", _id);
+  console.log(phone);
+  // if (!user) {
+  //   throw HttpError(401, "Email or password invalid");
+  // }
+  const newUserData = await User.findByIdAndUpdate(_id, {
+    phone,
+    city,
+    name,
+    numberNewPost,
+  });
+
+  res.json({
+    newUserData,
   });
 };
 
@@ -123,4 +147,5 @@ module.exports = {
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
   updateAvatar: ctrlWrapper(updateAvatar),
+  updateUser: ctrlWrapper(updateUser),
 };

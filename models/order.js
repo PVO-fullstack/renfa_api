@@ -25,7 +25,7 @@ const orderSchema = new Schema(
 orderSchema.post("save", handleMongooseError);
 
 const addSchema = Joi.object({
-  partId: Joi.array().items(Joi.string()),
+  partId: Joi.array().items(Joi.object()),
 });
 
 const updateCloseSchema = Joi.object({

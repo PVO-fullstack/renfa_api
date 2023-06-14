@@ -10,6 +10,8 @@ router.get("/", ctrl.getAllParts);
 
 router.get("/model:brand", ctrl.getModelBrand);
 
+router.get("/allmodel", ctrl.getAllModel);
+
 router.get("/brand:model", ctrl.getModel);
 
 router.get("/:partId", authenticate, isValidId.isValidPartId, ctrl.getPartById);

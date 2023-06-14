@@ -33,6 +33,12 @@ const getModelBrand = async (req, res) => {
   res.status(200).json(result);
 };
 
+const getAllModel = async (req, res) => {
+  const result = await Part.find({}, { Brand: 1, Model: 1 });
+  // const result = await as.distinct("Model");
+  res.status(200).json(result);
+};
+
 const getModel = async (req, res) => {
   const { model } = req.params;
   const result = await Part.find({ Model: model });
@@ -91,6 +97,7 @@ const updatePartById = async (req, res) => {
 module.exports = {
   getAllParts: ctrlWrapper(getAllParts),
   getModelBrand: ctrlWrapper(getModelBrand),
+  getAllModel: ctrlWrapper(getAllModel),
   getModel: ctrlWrapper(getModel),
   getPartById: ctrlWrapper(getPartById),
   postPart: ctrlWrapper(postPart),

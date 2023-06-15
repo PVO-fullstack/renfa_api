@@ -96,10 +96,10 @@ const updateUser = async (req, res) => {
   //   throw HttpError(401, "Email or password invalid");
   // }
   const newUserData = await User.findByIdAndUpdate(_id, {
-    phone,
-    city,
-    name,
-    numberNewPost,
+    phone: phone,
+    city: city,
+    name: name,
+    numberNewPost: numberNewPost,
   });
 
   res.json({

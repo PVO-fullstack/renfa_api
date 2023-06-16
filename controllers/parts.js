@@ -1,6 +1,19 @@
 const { Part } = require("../models/part");
-const { HttpError, ctrlWrapper } = require("../helpers");
+const { HttpError, ctrlWrapper, resizeAvatarImg } = require("../helpers");
 const { Model } = require("mongoose");
+const path = require("path");
+const fs = require("fs/promises");
+
+const imgDir = path.join(__dirname, "../", "public", "img");
+
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "drbkpqufz",
+  api_key: "328527282443142",
+  api_secret: "pS5hvjH5uwvqu30RcmPUb2Wc964",
+  secure: true,
+});
 
 // const getAllParts = async (req, res) => {
 //   const { _id: owner } = req.user;
@@ -74,14 +87,41 @@ const deletePartById = async (req, res) => {
 
 const updatePartById = async (req, res) => {
   const { partId } = req.params;
-  const result = await Part.findByIdAndUpdate(partId, req.body, {
-    new: true,
+  const { path: tempUpload } = req.file;
+  const uploaderRes = await cloudinary.uploader.upload(tempUpload);
+  const result = await Part.findByIdAndUpdate(partId, {
+    Img: uploaderRes.url,
   });
   if (!result) {
     throw HttpError(404, "Not found");
   }
   res.json(result);
 };
+
+// const updatePartById = async (req, res) => {
+//   const { partId } = req.params;
+//   const { path: tempUpload, originalname } = req.file;
+//   // await resizeAvatarImg(tempUpload);
+//   const filename = `${partId}_${originalname}`;
+//   console.log(filename);
+//   const qwe = cloudinary.url(filename, {
+//     width: 100,
+//     height: 150,
+//     crop: "fill",
+//     fetch_format: "auto",
+//   });
+//   console.log(qwe);
+//   // const resultUpload = path.join(avatarsDir, filename);
+//   // await fs.rename(tempUpload, resultUpload);
+//   // const avatarUrl = path.join("avatars", filename);
+//   const result = await Part.findByIdAndUpdate(partId, req.body, {
+//     new: true,
+//   });
+//   if (!result) {
+//     throw HttpError(404, "Not found");
+//   }
+//   res.json(result);
+// };
 
 // const updateFavoriteContactById = async (req, res) => {
 //   const { contactId } = req.params;

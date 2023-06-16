@@ -2,7 +2,12 @@ const express = require("express");
 const ctrl = require("../../controllers/parts");
 const router = express.Router();
 
-const { validateBody, isValidId, authenticate } = require("../../middlewares");
+const {
+  validateBody,
+  isValidId,
+  authenticate,
+  upload,
+} = require("../../middlewares");
 
 const { schemas } = require("../../models/part");
 
@@ -25,11 +30,11 @@ router.delete(
   ctrl.deletePartById
 );
 
-router.put(
+router.patch(
   "/:partId",
   authenticate,
   isValidId.isValidPartId,
-  validateBody(schemas.addSchema),
+  upload.single("img"),
   ctrl.updatePartById
 );
 

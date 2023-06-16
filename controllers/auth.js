@@ -6,8 +6,6 @@ const { User } = require("../models/user");
 const { HttpError, ctrlWrapper, resizeAvatarImg } = require("../helpers");
 const path = require("path");
 const fs = require("fs/promises");
-const { STATUS_CODES } = require("http");
-const { func } = require("joi");
 
 const { SECRET_KEY } = process.env;
 
@@ -90,8 +88,9 @@ const updateUser = async (req, res) => {
   const { _id } = req.user;
   const { phone, city, name, numberNewPost } = req.body;
   // const user = await User.findOne({ email });
-  console.log("user", _id);
-  console.log(phone);
+  // console.log("user", _id);
+  // console.log(phone);
+  // console.log(city);
   // if (!user) {
   //   throw HttpError(401, "Email or password invalid");
   // }

@@ -1,5 +1,5 @@
 const { Order } = require("../models/order");
-const { HttpError, ctrlWrapper } = require("../helpers");
+const { HttpError, ctrlWrapper, sendEmail } = require("../helpers");
 // const { Model } = require("mongoose");
 
 // const getAllParts = async (req, res) => {
@@ -44,9 +44,19 @@ const getUserOrders = async (req, res) => {
 
 const postOrders = async (req, res) => {
   const { _id: owner } = req.user;
-  // const { _id: part } = req.parts;
   console.log(owner);
   const result = await Order.create({ ...req.body, owner });
+  const { id } = result._id;
+  const odrer = await Order.find({ id }).populate("owner").populate("part.id");
+
+  const verifyEmail = {
+    to: "renfa@ukr.net",
+    subject: "Order",
+    html: odrer,
+  };
+
+  await sendEmail(verifyEmail);
+
   res.status(201).json(result);
 };
 

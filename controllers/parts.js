@@ -89,6 +89,7 @@ const updatePartById = async (req, res) => {
   const { partId } = req.params;
   const { path: tempUpload } = req.file;
   const uploaderRes = await cloudinary.uploader.upload(tempUpload);
+  await fs.unlink(tempUpload);
   const result = await Part.findByIdAndUpdate(partId, {
     Img: uploaderRes.url,
   });

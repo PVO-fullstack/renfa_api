@@ -43,16 +43,16 @@ const getUserOrders = async (req, res) => {
 };
 
 const postOrders = async (req, res) => {
-  const { _id: owner } = req.user;
+  const { _id: owner, email } = req.user;
   console.log(owner);
   const result = await Order.create({ ...req.body, owner });
   const { id } = result._id;
-  const odrer = await Order.find({ id }).populate("owner").populate("part.id");
-
+  const order = await Order.find({ id }).populate("owner").populate("part.id");
+  console.log(order);
   const verifyEmail = {
-    to: "renfa@ukr.net",
+    to: email,
     subject: "Order",
-    html: odrer,
+    html: order,
   };
 
   await sendEmail(verifyEmail);

@@ -1,10 +1,10 @@
 const { Part } = require("../models/part");
-const { HttpError, ctrlWrapper, resizeAvatarImg } = require("../helpers");
-const { Model } = require("mongoose");
+const { HttpError, ctrlWrapper } = require("../helpers");
+// const { Model } = require("mongoose");
 const path = require("path");
 const fs = require("fs/promises");
 
-const imgDir = path.join(__dirname, "../", "public", "img");
+// const imgDir = path.join(__dirname, "../", "public", "img");
 
 const cloudinary = require("cloudinary").v2;
 
@@ -38,6 +38,15 @@ const getAllParts = async (req, res) => {
     // limit,
   });
   res.status(200).json(result);
+};
+
+const deleteAllParts = async (req, res) => {
+  // const { page = 1, limit = 10 } = req.query;
+  // console.log("page", page);
+  // console.log("limit", limit);
+  // const skip = (page - 1) * limit;
+  const result = await Part.deleteMany({});
+  res.status(200).json({ message: "All delete" });
 };
 
 const getModelBrand = async (req, res) => {
@@ -99,6 +108,12 @@ const updatePartById = async (req, res) => {
   res.json(result);
 };
 
+const changePartById = async (req, res) => {
+  const { partId } = req.params;
+  const result = await Part.findByIdAndUpdate(partId, { ...req.body });
+  res.json(result);
+};
+
 // const updatePartById = async (req, res) => {
 //   const { partId } = req.params;
 //   const { path: tempUpload, originalname } = req.file;
@@ -144,5 +159,7 @@ module.exports = {
   postPart: ctrlWrapper(postPart),
   deletePartById: ctrlWrapper(deletePartById),
   updatePartById: ctrlWrapper(updatePartById),
+  deleteAllParts: ctrlWrapper(deleteAllParts),
+  changePartById: ctrlWrapper(changePartById),
   // updateFavoriteContactById: ctrlWrapper(updateFavoriteContactById),
 };

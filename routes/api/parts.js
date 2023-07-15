@@ -13,6 +13,8 @@ const { schemas } = require("../../models/part");
 
 router.get("/", ctrl.getAllParts);
 
+router.delete("/", ctrl.deleteAllParts);
+
 router.get("/model:brand", ctrl.getModelBrand);
 
 router.get("/allmodel", ctrl.getAllModel);
@@ -36,6 +38,13 @@ router.patch(
   isValidId.isValidPartId,
   upload.single("img"),
   ctrl.updatePartById
+);
+
+router.put(
+  "/:partId",
+  authenticate,
+  isValidId.isValidPartId,
+  ctrl.changePartById
 );
 
 // router.patch(

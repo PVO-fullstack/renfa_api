@@ -3,7 +3,7 @@
     "name": "renfa_api",
     "builds": [
         {
-            "src": "app.js",
+            "src": "server.js",
             "use": "@vercel/node"
         }
     ],

@@ -1,7 +1,7 @@
 const { Part } = require("../models/part");
 const { HttpError, ctrlWrapper } = require("../helpers");
 // const { Model } = require("mongoose");
-const path = require("path");
+// const path = require("path");
 const fs = require("fs/promises");
 
 // const imgDir = path.join(__dirname, "../", "public", "img");
@@ -84,7 +84,7 @@ const postPart = async (req, res) => {
 };
 
 const insertPart = async (req, res) => {
-  const result = await Part.insertMany({ ...req.body });
+  const result = await Part.insertMany([...req.body]);
   res.status(201).json(result);
 };
 

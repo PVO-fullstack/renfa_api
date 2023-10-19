@@ -83,6 +83,11 @@ const postPart = async (req, res) => {
   res.status(201).json(result);
 };
 
+const insertPart = async (req, res) => {
+  const result = await Part.insertMany({ ...req.body });
+  res.status(201).json(result);
+};
+
 const deletePartById = async (req, res) => {
   const { partId } = req.params;
   const result = await Part.findByIdAndDelete(partId);
@@ -157,6 +162,7 @@ module.exports = {
   getModel: ctrlWrapper(getModel),
   getPartById: ctrlWrapper(getPartById),
   postPart: ctrlWrapper(postPart),
+  insertPart: ctrlWrapper(insertPart),
   deletePartById: ctrlWrapper(deletePartById),
   updatePartById: ctrlWrapper(updatePartById),
   deleteAllParts: ctrlWrapper(deleteAllParts),

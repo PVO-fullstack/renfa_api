@@ -25,6 +25,13 @@ router.get("/:partId", authenticate, isValidId.isValidPartId, ctrl.getPartById);
 
 router.post("/", authenticate, validateBody(schemas.addSchema), ctrl.postPart);
 
+router.post(
+  "/parts",
+  authenticate,
+  validateBody(schemas.addSchema),
+  ctrl.insertPart
+);
+
 router.delete(
   "/:partId",
   authenticate,

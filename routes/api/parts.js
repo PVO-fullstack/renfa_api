@@ -28,7 +28,7 @@ router.post("/", authenticate, validateBody(schemas.addSchema), ctrl.postPart);
 router.post(
   "/parts",
   authenticate,
-  validateBody(schemas.addSchema),
+  validateBody(schemas.addManySchema),
   ctrl.insertPart
 );
 

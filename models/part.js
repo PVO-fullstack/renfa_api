@@ -66,18 +66,7 @@ const addSchema = Joi.object({
   Quantity: Joi.string(),
 });
 
-const addManySchema = Joi.array({
-  Brand: Joi.string().required(),
-  Model: Joi.array().items(Joi.string()).required(),
-  Articul: Joi.string().required(),
-  Part_Name: Joi.string().required(),
-  Description: Joi.string().required(),
-  Price: Joi.string(),
-  Img: Joi.string(),
-  In_stock: Joi.string(),
-  Country: Joi.string(),
-  Quantity: Joi.string(),
-});
+const addManySchema = Joi.array().items(addSchema);
 
 // const updateFavoriteSchema = Joi.object({
 //   favorite: Joi.boolean().required(),

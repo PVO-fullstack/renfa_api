@@ -63,7 +63,7 @@ const addSchema = Joi.object({
   Img: Joi.string(),
   In_stock: Joi.string(),
   Country: Joi.string(),
-  Quantity: Joi.string(),
+  Quantity: Joi.number(),
 });
 
 const addManySchema = Joi.array().items(addSchema);

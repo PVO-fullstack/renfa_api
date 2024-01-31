@@ -31,7 +31,7 @@ const partSchema = new Schema(
     Img: {
       type: String,
       default:
-        "https://dummyimage.com/640x480/2a2a2a/ffffff&text=%D0%A4%D0%BE%D1%82%D0%BE+%D0%BE%D1%87%D1%96%D0%BA%D1%83%D1%94%D1%82%D1%8C%D1%81%D1%8F",
+        "https://dummyimage.com/600x400/ffffff/000000.png&text=%D0%A4%D0%BE%D1%82%D0%BE+%D0%BE%D1%87%D1%96%D0%BA%D1%83%D1%94%D1%82%D1%8C%D1%81%D1%8F",
     },
     In_stock: {
       type: String,
@@ -46,7 +46,7 @@ const partSchema = new Schema(
       default: 0,
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 partSchema.post("save", handleMongooseError);

@@ -42,7 +42,7 @@ const userSchema = new Schema(
       type: Number,
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 userSchema.post("save", handleMongooseError);

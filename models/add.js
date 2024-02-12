@@ -22,7 +22,7 @@ const addSchema = new Schema(
   { versionKey: false, timestamps: true }
 );
 
-orderSchema.post("save", handleMongooseError);
+addSchema.post("save", handleMongooseError);
 
 const addNewSchema = Joi.object({
   partId: Joi.array().items(Joi.object()),

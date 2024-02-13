@@ -2,6 +2,7 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi");
 
 const { handleMongooseError } = require("../helpers");
+const parts = require("../controllers/parts");
 
 const orderSchema = new Schema(
   {
@@ -25,7 +26,12 @@ const orderSchema = new Schema(
 orderSchema.post("save", handleMongooseError);
 
 const addSchema = Joi.object({
-  partId: Joi.array().items(Joi.object()),
+  partId: Joi.array().items(
+    Joi.object({
+      id: Joi.string(),
+      ordered: Joi.number(),
+    })
+  ),
 });
 
 const updateCloseSchema = Joi.object({

@@ -44,16 +44,17 @@ const postAdd = async (req, res) => {
   const { _id: owner, email } = req.user;
   console.log(owner);
   const result = await Add.create({ ...req.body, owner });
-  const { id } = result._id;
-  const add = await Add.find({ id }).populate("owner").populate("part.id");
-  console.log(add);
-  const verifyEmail = {
-    to: email,
-    subject: "Order",
-    html: add,
-  };
+  console.log("result", result);
+  //   const { id } = result._id;
+  //   const add = await Add.find({ id }).populate("owner").populate("part.id");
+  //   console.log(add);
+  //   const verifyEmail = {
+  //     to: email,
+  //     subject: "Order",
+  //     html: add,
+  //   };
 
-  await sendEmail(verifyEmail);
+  //   await sendEmail(verifyEmail);
 
   res.status(201).json(result);
 };

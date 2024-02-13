@@ -46,16 +46,17 @@ const postOrders = async (req, res) => {
   const { _id: owner, email } = req.user;
   console.log(owner);
   const result = await Order.create({ ...req.body, owner });
-  const { id } = result._id;
-  const order = await Order.find({ id }).populate("owner").populate("part.id");
-  console.log(order);
-  const verifyEmail = {
-    to: email,
-    subject: "Order",
-    html: order,
-  };
+  console.log("result", result);
+  // const { id } = result._id;
+  // const order = await Order.find({ id }).populate("owner");
+  // console.log(order);
+  // const verifyEmail = {
+  //   to: email,
+  //   subject: "Order",
+  //   // html: order,
+  // };
 
-  await sendEmail(verifyEmail);
+  // await sendEmail(verifyEmail);
 
   res.status(201).json(result);
 };

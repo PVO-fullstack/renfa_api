@@ -39,9 +39,9 @@ router.post(
 // );
 
 router.patch(
-  "/:orderId/close",
+  "/:addId/close",
   authenticate,
-  isValidId.isValidOrderId,
+  isValidId.isValidAddId,
   validateBody(schemas.updateCloseSchema),
   ctrl.updateAddById
 );

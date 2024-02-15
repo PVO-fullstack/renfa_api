@@ -111,12 +111,13 @@ const postAdd = async (req, res) => {
 
 const updateAddById = async (req, res) => {
   const { addId } = req.params;
-  const result = await Add.findByIdAndUpdate(addId, req.body, {
+  const result = await Add.findByIdAndUpdate(addId, {
     close: true,
   });
   if (!result) {
     throw HttpError(404, "Not found");
   }
+  console.log(result);
   res.json(result);
 };
 

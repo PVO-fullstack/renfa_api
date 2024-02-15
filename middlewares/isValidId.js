@@ -17,7 +17,16 @@ const isValidOrderId = (req, res, next) => {
   next();
 };
 
+const isValidAddId = (req, res, next) => {
+  const { addId } = req.params;
+  if (!isValidObjectId(addId)) {
+    next(HttpError(400, `%{id} is not valid id`));
+  }
+  next();
+};
+
 module.exports = {
   isValidPartId,
   isValidOrderId,
+  isValidAddId,
 };

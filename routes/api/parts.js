@@ -40,11 +40,18 @@ router.delete(
 );
 
 router.patch(
-  "/:partId",
+  "/img/:partId",
   authenticate,
   isValidId.isValidPartId,
   upload.single("img"),
   ctrl.updatePartById
+);
+
+router.patch(
+  "/:partId",
+  authenticate,
+  isValidId.isValidPartId,
+  ctrl.updatePartCountById
 );
 
 router.put(

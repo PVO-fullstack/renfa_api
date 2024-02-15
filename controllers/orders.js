@@ -29,6 +29,7 @@ const { HttpError, ctrlWrapper, sendEmail } = require("../helpers");
 
 const getAllOrders = async (req, res) => {
   const result = await Order.find({}, "-updatedAt")
+    .sort({ createdAt: -1 })
     .populate("owner")
     .populate("partId.id");
   res.status(200).json(result);

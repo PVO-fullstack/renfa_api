@@ -129,6 +129,22 @@ const updatePartCountById = async (req, res) => {
   res.json(result);
 };
 
+const updatePartCountByIdSell = async (req, res) => {
+  const { partId } = req.params;
+  const { count } = req.body;
+  const part = await Part.findById(partId);
+  const quantity = part.Quantity;
+  const result = await Part.findByIdAndUpdate(partId, {
+    Quantity: quantity - count,
+  });
+  if (!result) {
+    throw HttpError(404, "Not found");
+  }
+
+  console.log(result);
+  res.json(result);
+};
+
 const changePartById = async (req, res) => {
   const { partId } = req.params;
   const result = await Part.findByIdAndUpdate(partId, { ...req.body });
@@ -184,5 +200,6 @@ module.exports = {
   deleteAllParts: ctrlWrapper(deleteAllParts),
   changePartById: ctrlWrapper(changePartById),
   updatePartCountById: ctrlWrapper(updatePartCountById),
+  updatePartCountByIdSell: ctrlWrapper(updatePartCountByIdSell),
   // updateFavoriteContactById: ctrlWrapper(updateFavoriteContactById),
 };

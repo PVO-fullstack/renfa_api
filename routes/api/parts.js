@@ -54,6 +54,13 @@ router.patch(
   ctrl.updatePartCountById
 );
 
+router.patch(
+  "/sell/:partId",
+  authenticate,
+  isValidId.isValidPartId,
+  ctrl.updatePartCountByIdSell
+);
+
 router.put(
   "/:partId",
   authenticate,
